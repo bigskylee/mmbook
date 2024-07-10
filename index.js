@@ -69,13 +69,26 @@ app.post('/test', async function (req, res, next) {
         var txts = []
         for (let index = 0; index < song.length; index++) {
             txts.push(
-                '<div>' +
+                '<tr>' +
+                    '<td>' +
+                    index +
+                    '</td>' +
+                    '<td>' +
                     song[index]['mnumber'] +
+                    '</td>' +
+                    '<td>' +
                     song[index]['mname'] +
+                    '</td>' +
+                    '<td>' +
                     song[index]['msinga'] +
+                    '</td>' +
+                    '<td>' +
                     song[index]['mcomposer'] +
+                    '</td>' +
+                    '<td>' +
                     song[index]['mlyricist'] +
-                    '</div>',
+                    '</td>' +
+                    '</tr>',
             )
         }
         let result = txts.join('')
