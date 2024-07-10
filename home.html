@@ -1,17 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>MMBook</title>
+        <link
+            rel="stylesheet"
+            href="/css/styles.css"
+        />
     </head>
     <body>
         <div id="warp">
             <div id="skip-nav"><a href="#serch">[검색바로가기]</a></div>
-            <header></header>
+            <header id="header">
+                <div class="inner">
+                    <div class="head-ect">
+                        MMBooks  
+                    </div>
+                </div>
+            </header>
             <h1>테스트</h1>
             <form action="/test" method="post">
                 <input type="text" name="test" />
+                <input type="hidden" name="'page" value="1" />
                 <button>검색</button>
                 <testsong />
             </form>

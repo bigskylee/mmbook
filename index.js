@@ -12,7 +12,7 @@ var request = require('request')
 
 /* GET home page. */
 app.get('/', async function (req, res, next) {
-    const html = path.resolve(__dirname + '/html/home.html')
+    const html = path.resolve(__dirname + '/home.html')
 
     res.sendFile(html)
 })
@@ -27,45 +27,48 @@ app.post('/test', async function (req, res, next) {
             'https://www.tjmedia.com/tjsong/song_search_list.asp?strType=2&natType=&strText=' +
             surch.test +
             '&strCond=0&intPage='
+        //String(surch.page)
+        console.log(surch.page)
         var song = []
-        while (number >= 1) {
-            var url2 = url + number
-            // while (chack == 1) {
-            const music = await axios.get(url2)
-            // const jsonmusic = JSON.parse(music.data)
-            var $ = cheerio.load(music.data)
-            $('#BoardType1').each((i, row) => {
-                const musictrs = $(row).find('tr')
-                // 예를 들어 첫 번째 td 요소만 가져오기
-                i = 1
-                while (i <= 15) {
-                    wtexttr = $(musictrs[i]).find('td')
-                    mnumber = $(wtexttr[0]).text()
-                    mname = $(wtexttr[1]).text()
-                    msinga = $(wtexttr[2]).text()
-                    mcomposer = $(wtexttr[3]).text()
-                    mlyricist = $(wtexttr[4]).text()
-                    if (mnumber == '') {
-                        console.log('stop')
-                        break
-                    }
-                    console.log(mnumber, mname, msinga, mcomposer, mlyricist)
-                    song.push({
-                        mnumber: mnumber,
-                        mname: mname,
-                        msinga: msinga,
-                        mcomposer: mcomposer,
-                        mlyricist: mlyricist,
-                    })
-                    i++
+        var pagechack = url + '1'
+        const numpage = await axios.get(pagechack)
+        var P = cheerio.load(numpage.data)
+        P('#page1').each((i, row) => {
+            const numbers = P(row).find('a') + 1
+        })
+        var url2 = url + surch.page
+        // while (chack == 1) {
+        const music = await axios.get(url2)
+        // const jsonmusic = JSON.parse(music.data)
+        var $ = cheerio.load(music.data)
+        $('#BoardType1').each((i, row) => {
+            const musictrs = $(row).find('tr')
+            // 예를 들어 첫 번째 td 요소만 가져오기
+            console.log(musictrs[1])
+            var t = 1
+            while (t <= 15) {
+                wtexttr = $(musictrs[t]).find('td')
+                mnumber = $(wtexttr[0]).text()
+                mname = $(wtexttr[1]).text()
+                msinga = $(wtexttr[2]).text()
+                mcomposer = $(wtexttr[3]).text()
+                mlyricist = $(wtexttr[4]).text()
+                if (mnumber == '') {
+                    console.log('stop')
+                    break
                 }
-            })
-            if (mnumber == '') {
-                console.log('stop2')
-                break
+                console.log(mnumber, mname, msinga, mcomposer, mlyricist)
+                song.push({
+                    mnumber: mnumber,
+                    mname: mname,
+                    msinga: msinga,
+                    mcomposer: mcomposer,
+                    mlyricist: mlyricist,
+                })
+                t++
             }
-            number++
-        }
+        })
+        number++
         var txts = []
         for (let index = 0; index < song.length; index++) {
             txts.push(
@@ -94,7 +97,7 @@ app.post('/test', async function (req, res, next) {
         let result = txts.join('')
         const fs = require('fs')
 
-        const ahtml = fs.readFileSync(__dirname + '/html/test.html', 'utf-8')
+        const ahtml = fs.readFileSync(__dirname + '/test.html', 'utf-8')
         const shtml = ahtml.replace('<testsong />', '<div>' + result + '</div>')
 
         res.send(shtml)

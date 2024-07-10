@@ -1,0 +1,14 @@
+.sing {
+  border: 1px solid black;
+}
+
+#header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: purple;
+}
+
+body {
+  font-size: 20px;
+}/*# sourceMappingURL=index.css.map */
