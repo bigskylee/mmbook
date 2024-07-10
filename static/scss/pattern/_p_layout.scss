@@ -104,10 +104,16 @@
         }
     }
 }
+.tablet {
+    display: none;
+}
 
 @include mobileMore {
     #header .head-in .util .btn-nav {
         font-size: 1.7rem;
+    }
+    .tablet {
+        display: table-cell;
     }
 }
 @include tabletMore {

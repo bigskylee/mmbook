@@ -420,9 +420,16 @@ legend {
   font-size: 2.7rem;
 }
 
+.tablet {
+  display: none;
+}
+
 @media (min-width: 600px) {
   #header .head-in .util .btn-nav {
     font-size: 1.7rem;
+  }
+  .tablet {
+    display: table-cell;
   }
 }
 @media (min-width: 1024px) {

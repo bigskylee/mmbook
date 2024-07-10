@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>MMBooks</title>
+        <link rel="stylesheet" href="/css/styles.css" />
+    </head>
+    <body>
+        <div id="warp">
+            <div id="skip-nav"><a href="#serch">[검색바로가기]</a></div>
+            <header id="header"><div class="inner">mmbooks</div></header>
+            <div id="manu">
+                <div class="inner">
+                    <h1>테스트</h1>
+                    <form action="/test" method="get">
+                        <input type="text" name="test" />
+                        <input type="hidden" name="page" value="1" />
+                        <button>검색</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div id="serch">
+            <div class="inner">
+                <div>검색결과</div>
+                <table class="sing">
+                    <tr>
+                        <td>번호</td>
+                        <td>노래방 번호</td>
+                        <td>제목</td>
+                        <td>가수</td>
+                        <td class="tablet">작사</td>
+                        <td class="tablet">작곡</td>
+                    </tr>
+                    <testsong />
+                </table>
+                <pagelink />
+            </div>
+        </div>
+    </body>
+</html>
