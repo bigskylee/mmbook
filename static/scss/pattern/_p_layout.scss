@@ -51,10 +51,10 @@
         background-size: contain;
         text-indent: -9999px;
     }
-    .head-in {
+    .head-top {
         display: flex;
         justify-content: space-between;
-        .util {
+        .tool {
             display: flex;
             gap: $spacer-6;
             .btn-nav {
@@ -109,7 +109,7 @@
 }
 
 @include mobileMore {
-    #header .head-in .util .btn-nav {
+    #header .head-top .tool .btn-nav {
         font-size: 1.7rem;
     }
     .tablet {
@@ -175,8 +175,8 @@
                 font-size: 2rem;
             }
         }
-        .head-in {
-            .util {
+        .head-top {
+            .tool {
                 .btn-nav.join {
                     display: flex;
                 }
@@ -295,4 +295,80 @@
 
 #footer {
     padding: 50px 0;
+    width: 100%;
+    background: #d95;
+}
+
+.sing {
+    text-align: center;
+    width: 100%;
+    td {
+        border-bottom: 1px solid silver;
+        color: black;
+        font-size: 1.3rem;
+        padding: 8px;
+    }
+}
+.pagebox {
+    display: flex;
+    justify-content: center;
+    a {
+        padding: 3px;
+    }
+    .page {
+        padding: 3px;
+        font-weight: 600;
+    }
+}
+
+.inner .text {
+    width: 60rem;
+    border-radius: 15px;
+    outline: none;
+    padding-left: 10px;
+    background-color: rgb(233, 233, 233);
+    height: 32px;
+    font-size: 15px;
+    border: 1;
+    border-color: aqua;
+}
+
+#manu {
+    top: 20px;
+    display: flex;
+    justify-content: center;
+    .inner {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+.homem {
+    min-height: 70rem;
+}
+.number {
+    font-weight: 800;
+}
+
+.f-inner {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    height: 20rem;
+    background: #d95;
+}
+.f-body {
+    bottom: 0;
+    width: 100%;
+    height: 20rem;
+    background: #d95;
+}
+
+#serch {
+    min-height: 70rem;
+}
+
+.mainlogo {
+    font-size: 14rem;
 }

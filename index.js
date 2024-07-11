@@ -40,7 +40,8 @@ app.get('/test', async function (req, res, next) {
             numbers = P(row).find('a').length
             console.log(numbers)
         })
-        var url2 = url + surch.page
+        const pagen = req.query.page
+        var url2 = url + pagen
         // while (chack == 1) {
         const music = await axios.get(url2)
         // const jsonmusic = JSON.parse(music.data)
@@ -77,9 +78,9 @@ app.get('/test', async function (req, res, next) {
             txts.push(
                 '<tr>' +
                     '<td>' +
-                    index +
+                    ((pagen - 1) * 15 + index + 1) +
                     '</td>' +
-                    '<td>' +
+                    '<td class="number">' +
                     song[index]['mnumber'] +
                     '</td>' +
                     '<td>' +
@@ -100,7 +101,11 @@ app.get('/test', async function (req, res, next) {
 
         var pages = []
         for (let index = 1; index < numbers + 2; index++) {
-            pages.push('<a href="test?test=' + surch + '&page=' + index + '">[' + index + ']</a>')
+            if (index == pagen) {
+                pages.push('<div class="page">' + index + '</div>')
+            } else {
+                pages.push('<a href="test?test=' + surch + '&page=' + index + '">[' + index + ']</a>')
+            }
         }
 
         let result = txts.join('')
@@ -108,7 +113,7 @@ app.get('/test', async function (req, res, next) {
         const fs = require('fs')
         const ahtml = fs.readFileSync(__dirname + '/static/html/test.html', 'utf-8')
         const ahtml2 = ahtml.replace('<testsong />', '<div>' + result + '</div>')
-        const shtml = ahtml2.replace('<pagelink />', '<div>' + page + '</div>')
+        const shtml = ahtml2.replace('<pagelink />', '<div class="pagebox">' + page + '</div>')
 
         res.send(shtml)
     } catch (e) {

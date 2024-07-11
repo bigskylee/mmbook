@@ -9,34 +9,34 @@
     <body>
         <div id="warp">
             <div id="skip-nav"><a href="#serch">[검색바로가기]</a></div>
-            <header id="header"><div class="inner">mmbooks</div></header>
-            <div id="manu">
+            <header id="header">
                 <div class="inner">
-                    <h1>테스트</h1>
+                    <div class="head-top">
+                        <div class="bener"><a href="/">mmbooks</a></div>
+                        <div class="tool"><a href="#">로그인</a><a href="#">회원가입</a></div>
+                    </div>
+                </div>
+            </header>
+            <div id="manu" class="homem">
+                <div class="inner">
+                    <div class="mainlogo">커다란 매인 이미지</div>
+                    <h1>노래검색</h1>
                     <form action="/test" method="get">
-                        <input type="text" name="test" />
+                        <input type="text" name="test" class="text hometext" autofocus />
                         <input type="hidden" name="page" value="1" />
                         <button>검색</button>
                     </form>
                 </div>
             </div>
         </div>
-        <div id="serch">
-            <div class="inner">
-                <div>검색결과</div>
-                <table class="sing">
-                    <tr>
-                        <td>번호</td>
-                        <td>노래방 번호</td>
-                        <td>제목</td>
-                        <td>가수</td>
-                        <td class="tablet">작사</td>
-                        <td class="tablet">작곡</td>
-                    </tr>
-                    <testsong />
-                    <pagelink />
-                </table>
+
+        <footer id="footer">
+            <div class="inner f-inner">
+                <div class="f-body">
+                    <div class="git"></div>
+                    <div class="pote"></div>
+                </div>
             </div>
-        </div>
+        </footer>
     </body>
 </html>

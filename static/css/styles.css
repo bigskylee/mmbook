@@ -371,15 +371,15 @@ legend {
   background-size: contain;
   text-indent: -9999px;
 }
-#header .head-in {
+#header .head-top {
   display: flex;
   justify-content: space-between;
 }
-#header .head-in .util {
+#header .head-top .tool {
   display: flex;
   gap: 2rem;
 }
-#header .head-in .util .btn-nav {
+#header .head-top .tool .btn-nav {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -387,36 +387,36 @@ legend {
   line-height: 1.5;
   font-size: var(--fz-label-xsm);
 }
-#header .head-in .util .btn-nav::before {
+#header .head-top .tool .btn-nav::before {
   font-family: "Line Awesome Free";
   font-weight: 900;
   font-size: 2.4rem;
 }
-#header .head-in .util .btn-nav.sch::before {
+#header .head-top .tool .btn-nav.sch::before {
   content: "\f002";
 }
-#header .head-in .util .btn-nav.login::before {
+#header .head-top .tool .btn-nav.login::before {
   content: "\f2f6";
 }
-#header .head-in .util .btn-nav.join {
+#header .head-top .tool .btn-nav.join {
   display: none;
 }
-#header .head-in .util .btn-nav.join::before {
+#header .head-top .tool .btn-nav.join::before {
   content: "\f234";
 }
-#header .head-in .util .btn-nav.my {
+#header .head-top .tool .btn-nav.my {
   display: none;
 }
-#header .head-in .util .btn-nav.my::before {
+#header .head-top .tool .btn-nav.my::before {
   content: "\f007";
 }
-#header .head-in .util .btn-nav.all {
+#header .head-top .tool .btn-nav.all {
   z-index: 100;
 }
-#header .head-in .util .btn-nav.all::before {
+#header .head-top .tool .btn-nav.all::before {
   content: "\f0c9";
 }
-#header .head-in .util i {
+#header .head-top .tool i {
   font-size: 2.7rem;
 }
 
@@ -425,7 +425,7 @@ legend {
 }
 
 @media (min-width: 600px) {
-  #header .head-in .util .btn-nav {
+  #header .head-top .tool .btn-nav {
     font-size: 1.7rem;
   }
   .tablet {
@@ -491,13 +491,13 @@ legend {
     font-weight: 900;
     font-size: 2rem;
   }
-  #header .head-in .util .btn-nav.join {
+  #header .head-top .tool .btn-nav.join {
     display: flex;
   }
-  #header .head-in .util .btn-nav.my {
+  #header .head-top .tool .btn-nav.my {
     display: flex;
   }
-  #header .head-in .util .btn-nav.all {
+  #header .head-top .tool .btn-nav.all {
     display: none;
   }
 }
@@ -596,6 +596,86 @@ legend {
 
 #footer {
   padding: 50px 0;
+  width: 100%;
+  background: #d95;
+}
+
+.sing {
+  text-align: center;
+  width: 100%;
+}
+.sing td {
+  border-bottom: 1px solid silver;
+  color: black;
+  font-size: 1.3rem;
+  padding: 8px;
+}
+
+.pagebox {
+  display: flex;
+  justify-content: center;
+}
+.pagebox a {
+  padding: 3px;
+}
+.pagebox .page {
+  padding: 3px;
+  font-weight: 600;
+}
+
+.inner .text {
+  width: 60rem;
+  border-radius: 15px;
+  outline: none;
+  padding-left: 10px;
+  background-color: rgb(233, 233, 233);
+  height: 32px;
+  font-size: 15px;
+  border: 1;
+  border-color: aqua;
+}
+
+#manu {
+  top: 20px;
+  display: flex;
+  justify-content: center;
+}
+#manu .inner {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.homem {
+  min-height: 70rem;
+}
+
+.number {
+  font-weight: 800;
+}
+
+.f-inner {
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  height: 20rem;
+  background: #d95;
+}
+
+.f-body {
+  bottom: 0;
+  width: 100%;
+  height: 20rem;
+  background: #d95;
+}
+
+#serch {
+  min-height: 70rem;
+}
+
+.mainlogo {
+  font-size: 14rem;
 }
 
 .bg-gray {
