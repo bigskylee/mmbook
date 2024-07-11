@@ -13,18 +13,31 @@
                 <div class="inner">
                     <div class="head-top">
                         <div class="bener"><a href="/">mmbooks</a></div>
-                        <div class="tool"><a href="#">로그인</a><a href="#">회원가입</a></div>
+                        <div class="tool"><a href="#">로그인</a><a href="#" class="join">회원가입</a></div>
                     </div>
                 </div>
             </header>
             <div id="manu" class="homem">
                 <div class="inner">
-                    <div class="mainlogo">커다란 매인 이미지</div>
+                    <div class="mainlogo">MMBooks</div>
                     <h1>노래검색</h1>
                     <form action="/test" method="get">
-                        <input type="text" name="test" class="text hometext" autofocus />
-                        <input type="hidden" name="page" value="1" />
-                        <button>검색</button>
+                        <div class="serche">
+                            <select name="karaoke" class="karaoke">
+                                <option value="">노래방선택</option>
+                                <option value="tj">TJ</option>
+                                <option value="ky">ky</option>
+                            </select>
+                            <select name="condition" class="condition">
+                                <option value="">조건</option>
+                                <option value="제목">제목</option>
+                                <option value="가수">가수</option>
+                                <option value="가사">가사</option>
+                            </select>
+                            <input type="text" name="test" class="text hometext" autofocus />
+                            <button>검색</button>
+                            <input type="hidden" name="page" value="1" />
+                        </div>
                     </form>
                 </div>
             </div>
@@ -33,8 +46,11 @@
         <footer id="footer">
             <div class="inner f-inner">
                 <div class="f-body">
-                    <div class="git"></div>
-                    <div class="pote"></div>
+                    <div class="git"><a href="#">깃허브 주소</a></div>
+                    <div class="pote"><a href="#">개발자 ppt</a></div>
+                    <div class="link"><a href="#">크롤링 주소</a></div>
+                    <div class="link"><a href="https://www.tjmedia.com/tjsong/song_search.asp">TJ노래검색</a></div>
+                    <div class="link"><a href="https://kysing.kr/">KY노래검색</a></div>
                 </div>
             </div>
         </footer>
