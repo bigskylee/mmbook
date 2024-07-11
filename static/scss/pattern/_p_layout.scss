@@ -144,7 +144,6 @@
 }
 
 #footer {
-    padding: 5rem 0;
     width: 100%;
     background: #d95;
 }
@@ -195,7 +194,7 @@ input {
     border-right: 1px solid gray;
 }
 .text {
-    width: 100%;
+    width: 80%;
 }
 
 button {
@@ -203,6 +202,7 @@ button {
 }
 
 #manu {
+    font-size: 0.8rem;
     top: 20px;
     display: flex;
     justify-content: center;
@@ -224,15 +224,20 @@ button {
     position: relative;
     bottom: 0;
     width: 100%;
-    height: 0.8rem;
+    height: 4rem;
     background: #d95;
 }
 .f-body {
+    display: flex;
+    padding: 0.8rem;
     font-size: 0.6rem;
     bottom: 0;
     width: 100%;
-    height: 0.8rem;
+    height: 4rem;
     background: #d95;
+    a {
+        padding: 0.3rem;
+    }
 }
 
 .radio {
@@ -245,5 +250,5 @@ button {
 }
 
 .mainlogo {
-    font-size: 5rem;
+    font-size: 3rem;
 }
