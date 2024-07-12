@@ -21,21 +21,22 @@
                 <div class="inner">
                     <h1>노래검색</h1>
                     <form action="/test" method="get">
-                        <div class="serche">
-                            <select name="karaoke" class="karaoke">
-                                <option value="">노래방선택</option>
-                                <option value="tj">TJ</option>
-                                <option value="ky">ky</option>
-                            </select>
-                            <select name="condition" class="condition">
-                                <option value="">조건</option>
-                                <option value="제목">제목</option>
-                                <option value="가수">가수</option>
-                                <option value="가사">가사</option>
-                            </select>
-                            <input type="text" name="test" class="text hometext" autofocus />
+                        <div class="lain">
+                            <div class="serche">
+                                <select name="karaoke" class="karaoke">
+                                    <option value="">노래방선택</option>
+                                    <option value="tj">TJ</option>
+                                    <option value="ky">ky</option>
+                                </select>
+                                <select name="condition" class="condition">
+                                    <option value="">조건</option>
+                                    <option value="제목">제목</option>
+                                    <option value="가수">가수</option>
+                                </select>
+                                <input type="text" name="test" class="text hometext" autofocus />
+                                <input type="hidden" name="page" value="1" />
+                            </div>
                             <button>검색</button>
-                            <input type="hidden" name="page" value="1" />
                         </div>
                     </form>
                 </div>
@@ -60,10 +61,38 @@
         <footer id="footer">
             <div class="inner f-inner">
                 <div class="f-body">
-                    <div class="git">github주소 그리고이미지</div>
-                    <div class="pote">포트폴리오 주소와 이미지</div>
+                    <div class="git"><a href="#">깃허브 주소</a></div>
+                    <div class="pote"><a href="#">개발자 ppt</a></div>
+                    <div class="link"><a href="https://www.tjmedia.com/tjsong/song_search.asp">TJ노래검색</a></div>
+                    <div class="link"><a href="https://kysing.kr/">KY노래검색</a></div>
                 </div>
             </div>
         </footer>
     </body>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // 기본값으로 선택할 옵션의 값을 가져온다.
+            const urlParams = new URLSearchParams(window.location.search)
+            const defaultkaraoke = urlParams.get('karaoke')
+            const defaultcondition = urlParams.get('condition')
+            const defaulttest = urlParams.get('test')
+            console.log(defaultkaraoke)
+
+            // select 요소를 찾는다.
+            const selectkaraoke = document.getElementById('karaoke')
+            const selectcondition = document.getElementById('condition')
+
+            // option 요소들을 모두 가져와서 기본값을 설정한다.
+            Array.from(selectkaraoke.options).forEach((option) => {
+                if (option.value === defaultkaraoke) {
+                    option.selected = true
+                }
+            })
+            Array.from(selectcondition.options).forEach((option) => {
+                if (option.value === defaultcondition) {
+                    option.selected = true
+                }
+            })
+        })
+    </script>
 </html>

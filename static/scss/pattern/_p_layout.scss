@@ -178,20 +178,27 @@
     border-left: 0px;
     outline: none;
     padding-left: 10px;
+    padding-right: 10px;
     background-color: rgb(233, 233, 233);
     height: 32px;
     font-size: 0.8rem;
     border: 1;
     border-color: aqua;
 }
-select,
-input {
+select {
     height: 25px;
     outline: none;
     background-color: rgb(233, 233, 233);
     border: 0;
     border-color: aqua;
     border-right: 1px solid gray;
+}
+
+input {
+    height: 25px;
+    outline: none;
+    background-color: rgb(233, 233, 233);
+    border: 0;
 }
 .text {
     width: 80%;
@@ -251,4 +258,8 @@ button {
 
 .mainlogo {
     font-size: 3rem;
+}
+
+.lain {
+    display: flex;
 }
