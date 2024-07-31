@@ -22,96 +22,19 @@ app.get('/', async function (req, res, next) {
 app.use(express.urlencoded({ extended: false }))
 app.get('/test', async function (req, res, next) {
     const crolling = require('./static/js/crolling.js')
-    const surch = req.query.test
+    const surch = req.query.surch
     // res.send(surch)
-    const karaoke = req.query.karaoke
-    const strtype = req.query.condition
+    const device = req.query.device
+    const condition = req.query.condition
+    const inpage = req.query.page
 
-    const turn = await crolling.dataColling(req, res, surch, karaoke, strtype)
+    const turn = await crolling.dataColling(req, res, surch, device, condition, inpage)
     try {
         var number = 1
         var url =
             'https://www.tjmedia.com/tjsong/song_search_list.asp?strType=2&natType=&strText=' +
             surch +
             '&strCond=0&intPage='
-        //String(surch.page)
-        //console.log(surch.page)
-        // var song = []
-        // var pagechack = url + '1'
-        // const numpage = await axios.get(pagechack)
-        // var P = cheerio.load(numpage.data)
-        // var numbers = 0
-        // P('#page1').each((i, row) => {
-        //     numbers = P(row).find('a').length
-        //     console.log(numbers)
-        // })
-        // const pagen = req.query.page
-        // var url2 = url + pagen
-        // // while (chack == 1) {
-        // const music = await axios.get(url2)
-        // // const jsonmusic = JSON.parse(music.data)
-        // var $ = cheerio.load(music.data)
-        // $('#BoardType1').each((i, row) => {
-        //     const musictrs = $(row).find('tr')
-        //     // 예를 들어 첫 번째 td 요소만 가져오기
-        //     var t = 1
-        //     while (t <= 15) {
-        //         wtexttr = $(musictrs[t]).find('td')
-        //         mnumber = $(wtexttr[0]).text()
-        //         mname = $(wtexttr[1]).text()
-        //         msinger = $(wtexttr[2]).text()
-        //         mcomposer = $(wtexttr[3]).text()
-        //         mlyricist = $(wtexttr[4]).text()
-        //         if (mnumber == '') {
-        //             console.log('stop')
-        //             break
-        //         }
-        //         console.log(mnumber, mname, msinger, mcomposer, mlyricist)
-        //         song.push({
-        //             mnumber: mnumber,
-        //             mname: mname,
-        //             msinger: msinger,
-        //             mcomposer: mcomposer,
-        //             mlyricist: mlyricist,
-        //         })
-        //         t++
-        //     }
-        // })
-        // number++
-        // var txts = []
-        // for (let index = 0; index < song.length; index++) {
-        //     txts.push(
-        //         '<tr>' +
-        //             '<td>' +
-        //             ((pagen - 1) * 15 + index + 1) +
-        //             '</td>' +
-        //             '<td class="number">' +
-        //             song[index]['mnumber'] +
-        //             '</td>' +
-        //             '<td>' +
-        //             song[index]['mname'] +
-        //             '</td>' +
-        //             '<td>' +
-        //             song[index]['msinger'] +
-        //             '</td>' +
-        //             '<td class="tablet">' +
-        //             song[index]['mcomposer'] +
-        //             '</td>' +
-        //             '<td class="tablet">' +
-        //             song[index]['mlyricist'] +
-        //             '</td>' +
-        //             '</tr>',
-        //     )
-        // }
-
-        // var pages = []
-        // for (let index = 1; index < numbers + 2; index++) {
-        //     if (index == pagen) {
-        //         pages.push('<div class="page">' + index + '</div>')
-        //     } else {
-        //         pages.push('<a href="test?test=' + surch + '&page=' + index + '">[' + index + ']</a>')
-        //     }
-        // }
     } catch (e) {
         console.error(e)
         res.send('에러')

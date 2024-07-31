@@ -1,4 +1,5 @@
 // 페이지의 레이아웃 영역
+
 .inner {
     padding-left: $spacer-5;
     padding-right: $spacer-5;
@@ -44,83 +45,43 @@
     .head-etc {
         display: none;
     }
-    #logo a {
-        display: block;
-        width: 13.2rem;
-        height: 100%;
-        background: url(https://uiux.egovframe.go.kr/resources/img/pattern/layout/head_logo.svg) no-repeat 0 50%;
-        background-size: contain;
-        text-indent: -9999px;
-    }
     .head-top {
         display: flex;
         justify-content: space-between;
         .tool {
             display: flex;
             gap: $spacer-6;
-            .btn-nav {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                height: 100%;
-                line-height: 1.5;
-                font-size: var(--fz-label-xsm);
+
+            .login {
                 &::before {
-                    font-family: 'Line Awesome Free';
-                    font-weight: 900;
-                    font-size: 2.4rem;
-                }
-                &.sch {
-                    &::before {
-                        content: '\f002';
-                    }
-                }
-                &.login {
-                    &::before {
-                        content: '\f2f6';
-                    }
-                }
-                &.join {
-                    display: none;
-                    &::before {
-                        content: '\f234';
-                    }
-                }
-                &.my {
-                    display: none;
-                    &::before {
-                        content: '\f007';
-                    }
-                }
-                &.all {
-                    z-index: 100;
-                    &::before {
-                        content: '\f0c9';
-                    }
+                    content: '\f2f6';
                 }
             }
-            i {
-                font-size: 2.7rem;
+            .join {
+                display: none;
+                &::before {
+                    content: '\f234';
+                }
             }
         }
     }
 }
+
 .tablet {
     display: none;
 }
 
-.join {
-    display: none;
-}
 @include mobileMore {
-    #header .head-top .tool {
-        font-size: 1.7rem;
-    }
-    .tablet {
-        display: table-cell;
-    }
-    .join {
-        display: flex;
+    #header {
+        .head-top .tool {
+            font-size: 1rem;
+            .tablet {
+                display: table-cell;
+            }
+            .join {
+                display: flex;
+            }
+        }
     }
 }
 @include tabletMore {
@@ -151,10 +112,11 @@
 .sing {
     text-align: center;
     width: 100%;
+
     td {
         border-bottom: 1px solid silver;
         color: black;
-        font-size: 1.3rem;
+        font-size: 0.8rem;
         padding: 8px;
     }
 }
@@ -167,6 +129,7 @@
     .page {
         padding: 3px;
         font-weight: 600;
+        color: black;
     }
 }
 
@@ -192,6 +155,7 @@ select {
     border: 0;
     border-color: aqua;
     border-right: 1px solid gray;
+    font-size: 15px;
 }
 
 input {
@@ -199,20 +163,42 @@ input {
     outline: none;
     background-color: rgb(233, 233, 233);
     border: 0;
+    font-size: 20px;
 }
 .text {
     width: 80%;
 }
 
 button {
-    width: 10%;
+    font-size: 10px;
+    text-shadow: 1px 0px white;
+    margin: 10px;
+    min-height: 20px;
+    height: 5vh;
+    min-width: 40px;
+    max-width: 120px;
+    width: 20vw;
+    border: 1px solid black;
+    border-radius: 50%/100%;
+    background: linear-gradient(0deg, rgb(248, 114, 36) 0%, rgb(255, 176, 58));
+    &:hover {
+        background: linear-gradient(0deg, rgb(190, 122, 45) 0%, rgb(201, 92, 29));
+        color: white;
+        border: 1px solid white;
+        text-shadow: 1px 0px black;
+    }
 }
 
 #manu {
+    color: white;
     font-size: 0.8rem;
     top: 20px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    min-height: 80vh;
+    background-image: url('./../../imgfile/mic.jpg');
+    background-size: cover;
     .inner {
         display: flex;
         justify-content: center;
@@ -254,6 +240,7 @@ button {
 
 #serch {
     min-height: 30rem;
+    background-color: white;
 }
 
 .mainlogo {

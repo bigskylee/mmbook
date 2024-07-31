@@ -21,25 +21,28 @@
                 <div class="inner">
                     <div class="mainlogo">MMBooks</div>
                     <h1>노래검색</h1>
-                    <form action="/test" method="get">
-                        <div class="lain">
-                            <div class="serche">
-                                <select name="karaoke" class="karaoke">
-                                    <option value="">노래방선택</option>
-                                    <option value="tj">TJ</option>
-                                    <option value="ky">ky</option>
-                                </select>
-                                <select name="condition" class="condition">
-                                    <option value="">조건</option>
-                                    <option value="제목">제목</option>
-                                    <option value="가수">가수</option>
-                                </select>
-                                <input type="text" name="test" class="text hometext" autofocus />
-                                <input type="hidden" name="page" value="1" />
-                            </div>
-                            <button>검색</button>
+
+                    <div class="lain">
+                        <div class="serche">
+                            <select id="condition" name="condition" class="condition">
+                                <option value="제목">제목</option>
+                                <option value="가수">가수</option>
+                            </select>
+                            <input
+                                type="text"
+                                name="test"
+                                class="text hometext"
+                                id="surch"
+                                autocomplete="off"
+                                autofocus
+                            />
+                            <input type="hidden" name="page" id="page" value="1" />
                         </div>
-                    </form>
+                    </div>
+                    <div>
+                        <button id="tjbutton" name="tj">TJ</button>
+                        <button id="kybutton" name="ky">KY</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -55,4 +58,5 @@
             </div>
         </footer>
     </body>
+    <script src="./../js/event.js"></script>
 </html>

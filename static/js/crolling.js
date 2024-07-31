@@ -11,32 +11,130 @@ var request = require('request')
 app.use(express.static('static'))
 const cookieParser = require('cookie-parser')
 
-async function dataColling(req, res, surch, device, condition) {
-    // res.send(surch)
-    console.log(surch)
+async function dataColling(req, res, surch, device, condition, pagen) {
+    // console.log(surch)
     const turn = []
+    let conditionnum = null
     try {
-        if (device == 'ky') {
+        if (device == 'KY') {
             //category= 검색 설정(통합 검색= [태그 제거],곡명=2 , 단일곡명=8, 가수=7, 곡번호=1, 작곡가=5 , 작사가=6 , 가사=4, LTS=11)
             if (condition == '제목') {
-                condition = '2'
+                conditionnum = '2'
             } else if (condition == '가수') {
-                condition = '7'
+                conditionnum = '7'
             }
 
-            var url = 'https://kysing.kr/search/?category=' + condition + '&keyword=' + surch
-        } else if (device == 'tj') {
+            var song = []
+            var url = 'https://kysing.kr/search/?category=' + conditionnum + '&keyword=' + surch + '&s_page='
+            var pagechack = url + '1'
+            const numpage = await axios.get(pagechack)
+            var P = cheerio.load(numpage.data)
+            var hrefs = []
+            P('.search_chart_page_nav a').each((i, row) => {
+                // let atags = P(row).find('a')
+                // console.log(atags)
+                // let atag = atags.hurl
+                const href = P(row).attr('href')
+                hrefs.push(href)
+            })
+            const endhref = hrefs[hrefs.length - 1]
+            const href = endhref.match(/s_page=(\d+)/)
+            const endpage = (sPageValue = href ? href[1] : '')
+            // console.log(numpage.data)
+            console.log(endpage)
+            var url2 = url + pagen
+            // while (chack == 1) {
+            const music = await axios.get(url2)
+            // const jsonmusic = JSON.parse(music.data)
+            var $ = cheerio.load(music.data)
+            $('#search_chart_frm_7').each((i, row) => {
+                const musictrs = $(row).find('ul')
+                var t = 1
+                while (t <= 15) {
+                    mnumber = $(musictrs[t]).find('.search_chart_num').text()
+                    mname = $(musictrs[t]).find('.search_chart_tit').find('span').first().text()
+                    msinger = $(musictrs[t]).find('.search_chart_sng').text()
+                    mcomposer = $(musictrs[t]).find('.search_chart_cmp').text()
+                    mlyricist = $(musictrs[t]).find('.search_chart_wrt').text()
+                    if (mnumber == '') {
+                        console.log('stop')
+                        break
+                    }
+                    song.push({
+                        mnumber: mnumber,
+                        mname: mname,
+                        msinger: msinger,
+                        mcomposer: mcomposer,
+                        mlyricist: mlyricist,
+                    })
+                    t++
+                }
+            })
+            var txts = []
+            for (let index = 0; index < song.length; index++) {
+                txts.push(
+                    '<tr>' +
+                        '<td>' +
+                        ((pagen - 1) * 15 + index + 1) +
+                        '</td>' +
+                        '<td class="number">' +
+                        song[index]['mnumber'] +
+                        '</td>' +
+                        '<td>' +
+                        song[index]['mname'] +
+                        '</td>' +
+                        '<td>' +
+                        song[index]['msinger'] +
+                        '</td>' +
+                        '<td class="tablet">' +
+                        song[index]['mcomposer'] +
+                        '</td>' +
+                        '<td class="tablet">' +
+                        song[index]['mlyricist'] +
+                        '</td>' +
+                        '</tr>',
+                )
+            }
+
+            var pages = []
+            var numbers = parseInt(endpage)
+            for (let index = 1; index < numbers + 1; index++) {
+                if (index == pagen) {
+                    pages.push('<div class="page">' + index + '</div>')
+                } else {
+                    pages.push(
+                        '<a href="/test/?surch=' +
+                            surch +
+                            '&device=' +
+                            device +
+                            '&condition=' +
+                            condition +
+                            '&page=' +
+                            index +
+                            '">[' +
+                            index +
+                            ']</a>',
+                    )
+                }
+            }
+
+            let result = txts.join('')
+            let page = pages.join('')
+
+            turn.push(result)
+            turn.push(page)
+        } else if (device == 'TJ') {
             //strType= 검색 타입(제목=1,가수=2,작사가=4,작곡가=8,곡번호=16,가사=32)\
             if (condition == '제목') {
-                condition = '1'
+                conditionnum = '1'
             } else if (condition == '가수') {
-                condition = '2'
+                conditionnum = '2'
             }
 
             var number = 1
             var url =
                 'https://www.tjmedia.com/tjsong/song_search_list.asp?strType=' +
-                condition +
+                conditionnum +
                 '&natType=&strText=' +
                 surch +
                 '&strCond=0&intPage='
@@ -50,7 +148,6 @@ async function dataColling(req, res, surch, device, condition) {
             P('#page1').each((i, row) => {
                 numbers = P(row).find('a').length
             })
-            const pagen = req.query.page
             var url2 = url + pagen
             // while (chack == 1) {
             const music = await axios.get(url2)
@@ -58,7 +155,6 @@ async function dataColling(req, res, surch, device, condition) {
             var $ = cheerio.load(music.data)
             $('#BoardType1').each((i, row) => {
                 const musictrs = $(row).find('tr')
-                // 예를 들어 첫 번째 td 요소만 가져오기
                 var t = 1
                 while (t <= 15) {
                     wtexttr = $(musictrs[t]).find('td')
@@ -113,7 +209,19 @@ async function dataColling(req, res, surch, device, condition) {
                 if (index == pagen) {
                     pages.push('<div class="page">' + index + '</div>')
                 } else {
-                    pages.push('<a href="test?test=' + surch + '&page=' + index + '">[' + index + ']</a>')
+                    pages.push(
+                        '<a href="/test/?surch=' +
+                            surch +
+                            '&device=' +
+                            device +
+                            '&condition=' +
+                            condition +
+                            '&page=' +
+                            index +
+                            '">[' +
+                            index +
+                            ']</a>',
+                    )
                 }
             }
 
