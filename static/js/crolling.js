@@ -238,5 +238,5 @@ async function dataColling(req, res, surch, device, condition, pagen) {
 }
 
 module.exports = {
-    dataColling: dataColling, // dataColling 함수를 exports에 추가
+    dataColling: dataColling,
 }

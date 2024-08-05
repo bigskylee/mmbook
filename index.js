@@ -8,14 +8,16 @@ var aspose = aspose || {}
 const fs = require('fs')
 var cheerio = require('cheerio')
 var request = require('request')
+const session = require('express-session')
 // aspose.cells = require('aspose.cells')
 app.use(express.static('static'))
 const cookieParser = require('cookie-parser')
+const mysql = require('./static/js/mysql.js')
+const login = require('./static/js/login.js')
 
 /* GET home page. */
 app.get('/', async function (req, res, next) {
     const html = path.resolve(__dirname + '/static/html/home.html')
-
     res.sendFile(html)
 })
 
@@ -29,16 +31,6 @@ app.get('/test', async function (req, res, next) {
     const inpage = req.query.page
 
     const turn = await crolling.dataColling(req, res, surch, device, condition, inpage)
-    try {
-        var number = 1
-        var url =
-            'https://www.tjmedia.com/tjsong/song_search_list.asp?strType=2&natType=&strText=' +
-            surch +
-            '&strCond=0&intPage='
-    } catch (e) {
-        console.error(e)
-        res.send('에러')
-    }
     let result = turn[0] //txts.join('')
     let page = turn[1] //pages.join('')
 
@@ -50,6 +42,22 @@ app.get('/test', async function (req, res, next) {
     res.send(shtml)
 
     // const html = path.resolve(__dirname + '/html/home.html')
+})
+
+app.post('/login/loginchack', async function (req, res, next) {
+    console.log('++++++++++++++++')
+    console.log(req.body)
+    login.logins(req, res, next)
+    const html = path.resolve(__dirname + '/static/html/login.html')
+    res.sendFile(html)
+})
+app.get('/login', async function (req, res, next) {
+    const html = path.resolve(__dirname + '/static/html/login.html')
+    res.sendFile(html)
+})
+app.get('/join', async function (req, res, next) {
+    const html = path.resolve(__dirname + '/static/html/join.html')
+    res.sendFile(html)
 })
 
 app.listen(port, () => {
