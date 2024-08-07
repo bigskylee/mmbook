@@ -16,31 +16,39 @@ function idcheck(value) {
 }
 
 function joincheck(id, pw, pwch, nik) {
+    var count = 0
     if (lengthcheck(id)) {
         console.log('통과')
+        count++
     } else {
         console.log('id길이')
     }
     if (nivaluecheck(nik)) {
         console.log('통과')
+        count++
     } else {
         console.log('닉길이')
     }
     if (lengthcheck(pw)) {
         console.log('통과')
+        count++
     } else {
         console.log('비번길이')
     }
     if (pwandpwch(pw, pwch)) {
         console.log('통과')
+        count++
     } else {
         console.log('확인다름')
     }
     if (idcheck(id)) {
         console.log('통과')
+        count++
     } else {
         console.log('한글or특문')
     }
+
+    return count == 5
 }
 
 document.getElementById('joinbutton').addEventListener('click', function () {
@@ -50,25 +58,25 @@ document.getElementById('joinbutton').addEventListener('click', function () {
     const nik = document.getElementById('nik').value
 
     if (joincheck(id, pw, pwch, nik)) {
-        // const form = document.createElement('form')
-        // form.setAttribute('method', 'post')
-        // form.setAttribute('action', `/res/${raid}/${pk}`)
-        // const uname = document.createElement('input')
-        // Raid.setAttribute('type', 'hidden')
-        // Raid.setAttribute('name', 'id')
-        // Raid.setAttribute('value', raid)
-        // const upassword = document.createElement('input')
-        // Atia.setAttribute('type', 'hidden')
-        // Atia.setAttribute('name', 'pw')
-        // Atia.setAttribute('value', data[0])
-        // const unik = document.createElement('input')
-        // Btia.setAttribute('type', 'hidden')
-        // Btia.setAttribute('name', 'unik')
-        // Btia.setAttribute('value', data[1])
-        // form.appendChild(uname)
-        // form.appendChild(upassword)
-        // form.appendChild(unik)
-        // document.body.appendChild(form)
-        // form.submit()
+        const form = document.createElement('form')
+        form.setAttribute('method', 'post')
+        form.setAttribute('action', `/join/save`)
+        const uname = document.createElement('input')
+        uname.setAttribute('type', 'hidden')
+        uname.setAttribute('name', 'id')
+        uname.setAttribute('value', id)
+        const upassword = document.createElement('input')
+        upassword.setAttribute('type', 'hidden')
+        upassword.setAttribute('name', 'pw')
+        upassword.setAttribute('value', pw)
+        const unik = document.createElement('input')
+        unik.setAttribute('type', 'hidden')
+        unik.setAttribute('name', 'unik')
+        unik.setAttribute('value', nik)
+        form.appendChild(uname)
+        form.appendChild(upassword)
+        form.appendChild(unik)
+        document.body.appendChild(form)
+        form.submit()
     }
 })

@@ -71,7 +71,7 @@ app.post('/login/loginchack', async function (req, res, next) {
     try {
         // login.logins(req, res, next)
         const logins = await login.logins(req, res, next)
-        if (logins.uname == 'admin') {
+        if (logins.uname) {
             req.session.user = logins
             res.redirect('/')
         } else if (logins == 'N') {
@@ -100,6 +100,13 @@ app.get('/join', async function (req, res, next) {
     const uhtml = userchack(req, html)
     res.send(uhtml)
 })
+app.post('/join/save', async function (req, res, next) {
+    await login.join(req, res, next)
+
+    const html = fs.readFileSync(__dirname + '/static/html/join.html', 'utf-8')
+    const uhtml = userchack(req, html)
+    res.send(uhtml)
+})
 app.get('/mypag', async function (req, res, next) {
     if (req.session.user) {
         const html = fs.readFileSync(__dirname + '/static/html/mypag.html', 'utf-8')
@@ -115,7 +122,13 @@ app.get('/mypag', async function (req, res, next) {
     }
 })
 
+app.post('/logout', async function (req, res, next) {
+    req.session.user = null
+    res.redirect('/login')
+})
 app.listen(port, () => {
     console.log('서버on port:3000')
 })
 // odule.exports = router
+
+// req.session.user = null; 세션 삭제
