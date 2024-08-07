@@ -11,7 +11,9 @@
             <div class="inner">
                 <div class="head-top">
                     <div class="bener"><a href="/">mmbooks</a></div>
-                    <div class="tool"><a href="/login">로그인</a><a href="/join" class="join">회원가입</a></div>
+                    <div class="tool">
+                        <heders />
+                    </div>
                 </div>
             </div>
         </header>
@@ -19,8 +21,8 @@
             login
             <div>
                 <form action="/login/loginchack" method="post">
-                    <input name="id" type="text" placeholder="ID" />
-                    <input name="password" type="password" placeholder="PW" />
+                    <input name="id" type="text" placeholder="ID" autocomplete="off" />
+                    <input name="password" type="password" placeholder="PW" autocomplete="off" />
                     <button id="loginbutton">login</button>
                 </form>
             </div>

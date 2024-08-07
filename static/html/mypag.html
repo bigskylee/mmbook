@@ -15,26 +15,13 @@
                 </div>
             </div>
         </header>
-        <div class="main">
-            <table>
-                <tr>
-                    <td>아이디 :</td>
-                    <td><input id="id" type="text" name="id" autocomplete="off" placeholder="영문&숫자 4~12" /></td>
-                </tr>
-                <tr>
-                    <td>닉네임 :</td>
-                    <td><input id="nik" type="text" name="nik" autocomplete="off" placeholder="2~12글자" /></td>
-                </tr>
-                <tr>
-                    <td>비밀번호 :</td>
-                    <td><input id="pw" type="password" name="pw" autocomplete="off" placeholder="한글불가 8~16" /></td>
-                </tr>
-                <tr>
-                    <td>비밀번호확인 :</td>
-                    <td><input id="pwch" type="password" name="pwchak" autocomplete="off" /></td>
-                </tr>
-            </table>
-            <div><button id="joinbutton">등록</button></div>
+        <div class="inner">
+            <div>
+                <div>닉네임 : <nik /></div>
+                <div>아이디 : <id /></div>
+                <button>정보수정하기</button>
+                <div style="display: none">비밀번호 : <input type="password" /><pw /></div>
+            </div>
         </div>
         <footer id="footer">
             <div class="inner f-inner">
@@ -47,6 +34,4 @@
             </div>
         </footer>
     </body>
-    <script src="./../js/event.js"></script>
-    <script src="./../js/join.js"></script>
 </html>

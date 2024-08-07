@@ -1,5 +1,8 @@
 const mysql = require('mysql')
+const express = require('express')
 const session = require('express-session')
+
+var app = express()
 
 const db = mysql.createConnection({
     host: 'localhost',
@@ -9,27 +12,26 @@ const db = mysql.createConnection({
 })
 
 async function login(id, pw) {
-    const loginsql = 'SELECT  * FROM user WHERE uname="' + id + '"'
-    db.query(loginsql, (err, result) => {
-        console.log(err)
-        console.log(result)
-        console.log(result[0].upassword)
-        if (result[0].upassword == String(pw)) {
-            console.log('성공!')
-            res.redirect('/login')
-        } else {
-            console.log('실패')
-            res.redirect('/login')
-        }
+    return new Promise((resolve, reject) => {
+        const loginsql = 'SELECT  * FROM user WHERE uname="' + id + '"'
+        db.query(loginsql, (err, result) => {
+            if (result[0].upassword == String(pw)) {
+                return resolve(result[0])
+            } else {
+                console.log('실패')
+                return resolve('N')
+            }
+        })
     })
 }
 
-function logins(req, res, next) {
-    const id = req.body.id
-    console.log(id)
-    const pw = req.body.password
-    console.log(pw)
-    login(id, pw)
+async function logins(req, res, next) {
+    return new Promise(async (resolve, reject) => {
+        const id = req.body.id
+        const pw = req.body.password
+        const user = await login(id, pw)
+        return resolve(user)
+    })
 }
 
 module.exports = {

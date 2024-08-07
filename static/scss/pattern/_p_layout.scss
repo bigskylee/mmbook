@@ -250,3 +250,9 @@ button {
 .lain {
     display: flex;
 }
+
+.main {
+    @include flex();
+    flex-direction: column;
+    min-height: 80vh;
+}
