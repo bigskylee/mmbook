@@ -108,11 +108,14 @@ app.get('/join', async function (req, res, next) {
     res.send(uhtml)
 })
 app.post('/join/save', async function (req, res, next) {
-    await login.join(req, res, next)
-
-    const html = fs.readFileSync(__dirname + '/static/html/join.html', 'utf-8')
-    const uhtml = userchack(req, html)
-    res.send(uhtml)
+    const join = await login.join(req, res, next)
+    if (join) {
+        res.redirect('/login')
+    } else {
+        const html = fs.readFileSync(__dirname + '/static/html/join.html', 'utf-8')
+        const uhtml = userchack(req, html)
+        res.send(uhtml)
+    }
 })
 app.get('/mypag', async function (req, res, next) {
     if (req.session.user) {
@@ -120,7 +123,7 @@ app.get('/mypag', async function (req, res, next) {
         const mhtml1 = html.replace('<nik />', '<input type="text" id="nik"  value="' + req.session.user.unik + '" >')
         const mhtml2 = mhtml1.replace(
             '<id />',
-            '<input class="inputhiden" type="text" value="' + req.session.user.uname + '" readonly >',
+            '<input class="inputhiden" id="id" type="text" value="' + req.session.user.uname + '" readonly >',
         )
 
         const uhtml = userchack(req, mhtml2)
@@ -140,8 +143,8 @@ app.post('/correction', async function (req, res, next) {
     res.redirect('/mypag')
 })
 
-app.post('/userdelete', async function (rep, res, next) {
-    userdelete(req, res, next)
+app.post('/userdelete', async function (req, res, next) {
+    await login.userdelete(req, res, next)
     const html = fs.readFileSync(__dirname + '/static/html/home.html', 'utf-8')
     const uhtml = userchack(req, html)
     res.send(uhtml)

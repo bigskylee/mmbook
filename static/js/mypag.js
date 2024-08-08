@@ -55,3 +55,26 @@ document.getElementById('logout').addEventListener('click', function () {
         return
     }
 })
+document.getElementById('delete').addEventListener('click', function () {
+    if (confirm('정말 삭제합니까?') == true) {
+        const id = document.getElementById('id').value
+        console.log(id)
+        //확인
+        // document.form.submit()
+        const form = document.createElement('form')
+        form.setAttribute('method', 'post')
+        form.setAttribute('action', `/userdelete`)
+
+        const ids = document.createElement('input')
+        ids.setAttribute('type', 'hidden')
+        ids.setAttribute('name', 'id')
+        ids.setAttribute('value', id)
+
+        form.appendChild(ids)
+        document.body.appendChild(form)
+        form.submit()
+    } else {
+        //취소
+        return
+    }
+})

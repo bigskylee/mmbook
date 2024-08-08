@@ -52,12 +52,17 @@ async function join(req, res, next) {
     db.query(joinsql, [id, pw, unik], (err, result) => {
         if (err) {
             console.error('Error occurred:', err)
+            return false
+        } else {
+            console.log('Success!')
+            return true
         }
-        console.log('Success!')
     })
 }
 
 async function userdelete(req, res, next) {
+    const id = req.body.id
+    console.log(id)
     const deletesql = 'DELETE FROM user WHERE uname = ?'
     db.query(deletesql, [id], (err, result) => {
         if (err) {
@@ -71,4 +76,5 @@ module.exports = {
     login: login,
     logins: logins,
     join: join,
+    userdelete: userdelete,
 }
