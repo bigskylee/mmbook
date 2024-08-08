@@ -72,6 +72,13 @@ async function userdelete(req, res, next) {
     })
 }
 
+async function correction(req, res, next) {
+    const id = req.body.id
+    const pw = req.body.pw
+    const pwch = req.body.pwch
+    const nik = req.body.nik
+}
+
 module.exports = {
     login: login,
     logins: logins,
