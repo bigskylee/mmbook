@@ -17,14 +17,15 @@
                 </div>
             </div>
         </header>
-        <div class="inner">
-            login
-            <div>
-                <form action="/login/loginchack" method="post">
+        <div class="main">
+            로그인
+            <div class="inner login">
+                <form class="login" action="/login/loginchack" method="post">
                     <input name="id" type="text" placeholder="ID" autocomplete="off" />
                     <input name="password" type="password" placeholder="PW" autocomplete="off" />
                     <button id="loginbutton">login</button>
                 </form>
+                <a href="/join" class="joina">회원가입 하러가기</a>
             </div>
         </div>
         <footer id="footer">

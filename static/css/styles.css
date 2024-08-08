@@ -574,6 +574,41 @@ button:hover {
   min-height: 80vh;
 }
 
+.login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  flex-direction: column;
+}
+.login input {
+  text-align: center;
+  margin-top: 10px;
+  width: 60vw;
+  max-width: 200px;
+  border: 1px solid orange;
+}
+
+.joina {
+  text-align: center;
+  font-size: 1rem;
+}
+
+.join {
+  font-size: 0.8rem;
+}
+.join td {
+  text-align: right;
+  padding-right: 10px;
+}
+.join input {
+  margin-top: 10px;
+  width: 50vw;
+  max-width: 140px;
+  font-size: 0.8rem;
+  border: 1px solid orange;
+}
+
 .bg-gray {
   background-color: #f8f8f8;
 }

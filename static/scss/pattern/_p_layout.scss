@@ -256,3 +256,35 @@ button {
     flex-direction: column;
     min-height: 80vh;
 }
+
+.login {
+    @include flex();
+    flex-direction: column;
+    input {
+        text-align: center;
+        margin-top: 10px;
+        width: 60vw;
+        max-width: 200px;
+        border: 1px solid orange;
+    }
+}
+
+.joina {
+    text-align: center;
+    font-size: 1rem;
+}
+
+.join {
+    font-size: 0.8rem;
+    td {
+        text-align: right;
+        padding-right: 10px;
+    }
+    input {
+        margin-top: 10px;
+        width: 50vw;
+        max-width: 140px;
+        font-size: 0.8rem;
+        border: 1px solid orange;
+    }
+}
