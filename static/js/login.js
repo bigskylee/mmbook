@@ -17,6 +17,9 @@ async function login(id, pw) {
     return new Promise((resolve, reject) => {
         const loginsql = 'SELECT  * FROM user WHERE uname=?'
         db.query(loginsql, [id], (err, result) => {
+            if (result.length === 0) {
+                return resolve('N')
+            }
             console.log(result)
             console.log(result[0])
             if (result[0].upassword == String(pw)) {
@@ -24,6 +27,7 @@ async function login(id, pw) {
                 return resolve(result[0])
             } else {
                 console.log('login실패')
+                return resolve('N')
             }
         })
     })
@@ -46,6 +50,16 @@ async function join(req, res, next) {
     const unik = req.body.unik
     const joinsql = 'INSERT INTO user (uname,upassword,unik)  VALUES (?,?,?)'
     db.query(joinsql, [id, pw, unik], (err, result) => {
+        if (err) {
+            console.error('Error occurred:', err)
+        }
+        console.log('Success!')
+    })
+}
+
+async function userdelete(req, res, next) {
+    const deletesql = 'DELETE FROM user WHERE uname = ?'
+    db.query(deletesql, [id], (err, result) => {
         if (err) {
             console.error('Error occurred:', err)
         }

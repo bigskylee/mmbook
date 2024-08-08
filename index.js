@@ -12,7 +12,6 @@ const session = require('express-session')
 // aspose.cells = require('aspose.cells')
 app.use(express.static('static'))
 const cookieParser = require('cookie-parser')
-const mysql = require('./static/js/mysql.js')
 const login = require('./static/js/login.js')
 
 app.use(
@@ -76,6 +75,7 @@ app.post('/login/loginchack', async function (req, res, next) {
             res.redirect('/')
         } else if (logins == 'N') {
             console.log('로그인 실패')
+            req.session.login = '아이디나 비밀번호가 틀렸습니다.'
             res.redirect('/login')
         }
     } catch (error) {
@@ -91,8 +91,15 @@ app.get('/login', async function (req, res, next) {
         res.send(uhtml)
     } else {
         const html = fs.readFileSync(__dirname + '/static/html/login.html', 'utf-8')
-        const uhtml = userchack(req, html)
-        res.send(uhtml)
+        if (req.session.login) {
+            const uhtml2 = html.replace('<err />', '<div class="err">' + req.session.login + '</div>')
+            const uhtml = userchack(req, uhtml2)
+            req.session.login = null
+            res.send(uhtml)
+        } else {
+            const uhtml = userchack(req, html)
+            res.send(uhtml)
+        }
     }
 })
 app.get('/join', async function (req, res, next) {
@@ -110,10 +117,13 @@ app.post('/join/save', async function (req, res, next) {
 app.get('/mypag', async function (req, res, next) {
     if (req.session.user) {
         const html = fs.readFileSync(__dirname + '/static/html/mypag.html', 'utf-8')
-        const mhtml1 = html.replace('<nik />', '<input type="text" value="' + req.session.user.unik + '">')
-        const mhtml2 = mhtml1.replace('<id />', req.session.user.uname)
-        const mhtml3 = mhtml2.replace('<pw />', req.session.user.upassword)
-        const uhtml = userchack(req, mhtml3)
+        const mhtml1 = html.replace('<nik />', '<input type="text" id="nik"  value="' + req.session.user.unik + '" >')
+        const mhtml2 = mhtml1.replace(
+            '<id />',
+            '<input class="inputhiden" type="text" value="' + req.session.user.uname + '" readonly >',
+        )
+
+        const uhtml = userchack(req, mhtml2)
         res.send(uhtml)
     } else {
         const html = fs.readFileSync(__dirname + '/static/html/home.html', 'utf-8')
@@ -126,6 +136,17 @@ app.post('/logout', async function (req, res, next) {
     req.session.user = null
     res.redirect('/login')
 })
+app.post('/correction', async function (req, res, next) {
+    res.redirect('/mypag')
+})
+
+app.post('/userdelete', async function (rep, res, next) {
+    userdelete(req, res, next)
+    const html = fs.readFileSync(__dirname + '/static/html/home.html', 'utf-8')
+    const uhtml = userchack(req, html)
+    res.send(uhtml)
+})
+
 app.listen(port, () => {
     console.log('서버on port:3000')
 })

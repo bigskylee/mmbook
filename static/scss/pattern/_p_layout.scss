@@ -288,3 +288,24 @@ button {
         border: 1px solid orange;
     }
 }
+
+.noscroll {
+    overflow: hidden;
+}
+
+.inputhiden {
+    background: white;
+}
+
+.err {
+    font-size: 0.7rem;
+    color: red;
+}
+
+.correction {
+    display: none;
+}
+
+.Express {
+    display: block;
+}

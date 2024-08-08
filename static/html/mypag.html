@@ -6,7 +6,7 @@
         <title>Document</title>
         <link rel="stylesheet" href="/css/styles.css" />
     </head>
-    <body>
+    <body class="noscroll">
         <header id="header">
             <div class="inner">
                 <div class="head-top">
@@ -15,13 +15,16 @@
                 </div>
             </div>
         </header>
-        <div class="inner">
+        <div class="inner main">
             <div>
                 <div>닉네임 : <nik /></div>
                 <div>아이디 : <id /></div>
-                <button>정보수정하기</button>
+                <div class="correction">비밀번호 : <input name="pw" type="password" id="pw" /></div>
+                <div class="correction">비밀번호확인 : <input name="pwch" type="password" id="pwch" /></div>
+                <div class="correction"><button id="complete">수정 완료</button></div>
+                <button id="correbutton">정보수정하기</button>
                 <button id="logout">로그아웃</button>
-                <div style="display: none">비밀번호 : <input type="password" /><pw /></div>
+                <button id="delete">아이디 삭제</button>
             </div>
         </div>
         <footer id="footer">
@@ -35,5 +38,5 @@
             </div>
         </footer>
     </body>
-    <script src="./../js/logout.js"></script>
+    <script src="./../js/mypag.js"></script>
 </html>

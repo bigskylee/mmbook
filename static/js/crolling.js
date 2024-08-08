@@ -17,11 +17,14 @@ async function dataColling(req, res, surch, device, condition, pagen) {
     let conditionnum = null
     try {
         if (device == 'KY') {
+            var frm = null
             //category= 검색 설정(통합 검색= [태그 제거],곡명=2 , 단일곡명=8, 가수=7, 곡번호=1, 작곡가=5 , 작사가=6 , 가사=4, LTS=11)
             if (condition == '제목') {
                 conditionnum = '2'
+                frm = '#search_chart_frm_2'
             } else if (condition == '가수') {
                 conditionnum = '7'
+                frm = '#search_chart_frm_7'
             }
 
             var song = []
@@ -47,7 +50,7 @@ async function dataColling(req, res, surch, device, condition, pagen) {
             const music = await axios.get(url2)
             // const jsonmusic = JSON.parse(music.data)
             var $ = cheerio.load(music.data)
-            $('#search_chart_frm_7').each((i, row) => {
+            $(frm).each((i, row) => {
                 const musictrs = $(row).find('ul')
                 var t = 1
                 while (t <= 15) {
@@ -98,9 +101,36 @@ async function dataColling(req, res, surch, device, condition, pagen) {
 
             var pages = []
             var numbers = parseInt(endpage)
-            for (let index = 1; index < numbers + 1; index++) {
+            var pgrup = Math.floor(pagen / 10)
+            if (pagen > 10) {
+                pages.push(
+                    '<a href="/test/?surch=' +
+                        surch +
+                        '&device=' +
+                        device +
+                        '&condition=' +
+                        condition +
+                        '&page=' +
+                        1 +
+                        '"><<</a>',
+                )
+                pages.push(
+                    '<a href="/test/?surch=' +
+                        surch +
+                        '&device=' +
+                        device +
+                        '&condition=' +
+                        condition +
+                        '&page=' +
+                        (pgrup * 10 - 1) +
+                        '"><</a>',
+                )
+            }
+            for (let index = pgrup * 10 + 1; index < pgrup * 10 + 11; index++) {
                 if (index == pagen) {
                     pages.push('<div class="page">' + index + '</div>')
+                } else if (index > numbers) {
+                    break
                 } else {
                     pages.push(
                         '<a href="/test/?surch=' +
@@ -116,6 +146,30 @@ async function dataColling(req, res, surch, device, condition, pagen) {
                             ']</a>',
                     )
                 }
+            }
+            if (numbers - pgrup > 10) {
+                pages.push(
+                    '<a href="/test/?surch=' +
+                        surch +
+                        '&device=' +
+                        device +
+                        '&condition=' +
+                        condition +
+                        '&page=' +
+                        (pgrup * 10 + 11) +
+                        '">></a>',
+                )
+                pages.push(
+                    '<a href="/test/?surch=' +
+                        surch +
+                        '&device=' +
+                        device +
+                        '&condition=' +
+                        condition +
+                        '&page=' +
+                        numbers +
+                        '">>></a>',
+                )
             }
 
             let result = txts.join('')
@@ -141,18 +195,15 @@ async function dataColling(req, res, surch, device, condition, pagen) {
             //String(surch.page)
             //console.log(surch.page)
             var song = []
-            var pagechack = url + '1'
-            const numpage = await axios.get(pagechack)
-            var P = cheerio.load(numpage.data)
             var numbers = 0
-            P('#page1').each((i, row) => {
-                numbers = P(row).find('a').length
-            })
             var url2 = url + pagen
             // while (chack == 1) {
             const music = await axios.get(url2)
             // const jsonmusic = JSON.parse(music.data)
             var $ = cheerio.load(music.data)
+            $('#page1').each((i, row) => {
+                numbers = $(row).find('a').length
+            })
             $('#BoardType1').each((i, row) => {
                 const musictrs = $(row).find('tr')
                 var t = 1
@@ -205,7 +256,21 @@ async function dataColling(req, res, surch, device, condition, pagen) {
             }
 
             var pages = []
-            for (let index = 1; index < numbers + 2; index++) {
+            var pgrup = Math.floor(pagen / 10)
+            if (pagen > 10) {
+                pages.push(
+                    '<a href="/test/?surch=' +
+                        surch +
+                        '&device=' +
+                        device +
+                        '&condition=' +
+                        condition +
+                        '&page=' +
+                        (pgrup * 10 - 1) +
+                        '"><</a>',
+                )
+            }
+            for (let index = pgrup * 10 + 1; index < numbers + pgrup * 10 + 2 && index < pgrup * 10 + 11; index++) {
                 if (index == pagen) {
                     pages.push('<div class="page">' + index + '</div>')
                 } else {
@@ -223,6 +288,21 @@ async function dataColling(req, res, surch, device, condition, pagen) {
                             ']</a>',
                     )
                 }
+            }
+            console.log(numbers)
+            if ((pagen < 11 && numbers > 9) || (pagen > 10 && numbers > 10)) {
+                console.log('화살표 테스트')
+                pages.push(
+                    '<a href="/test/?surch=' +
+                        surch +
+                        '&device=' +
+                        device +
+                        '&condition=' +
+                        condition +
+                        '&page=' +
+                        (pgrup * 10 + 11) +
+                        '">></a>',
+                )
             }
 
             let result = txts.join('')
