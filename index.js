@@ -14,6 +14,8 @@ app.use(express.static('static'))
 const cookieParser = require('cookie-parser')
 const login = require('./static/js/login.js')
 
+app.use(express.json())
+
 app.use(
     session({
         secret: 'mmbook',
@@ -154,6 +156,14 @@ app.post('/userdelete', async function (req, res, next) {
     const html = fs.readFileSync(__dirname + '/static/html/home.html', 'utf-8')
     const uhtml = userchack(req, html)
     res.send(uhtml)
+})
+
+app.post('/savesing', async function (req, res, next) {
+    console.log(req.body)
+    if (req.session.user) {
+        const username = req.session.user.uname
+        login.savesing(req, res, next, username)
+    }
 })
 
 app.listen(port, () => {

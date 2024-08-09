@@ -309,3 +309,16 @@ button {
 .Express {
     display: block;
 }
+.favorites {
+    border: 1px solid black;
+    cursor: pointer;
+}
+#model {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+#potup {
+    font-size: 1rem;
+}

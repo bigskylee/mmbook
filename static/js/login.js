@@ -85,10 +85,31 @@ async function correction(req, res, next) {
     })
 }
 
+async function savesing(req, res, next, uname) {
+    console.log(req.body)
+    const snum = req.body.snum
+    const sname = req.body.sname
+    const ssinger = req.body.ssinger
+    const scomposer = req.body.scomposer
+    const slyricist = req.body.slyricist
+
+    const savesql = 'INSERT INTO sing (snum,username,sname,ssinger,scomposer,slyricist)  VALUES (?,?,?,?,?,?)'
+    db.query(savesql, [snum, uname, sname, ssinger, scomposer, slyricist], (err, result) => {
+        if (err) {
+            console.error('Error occurred:', err)
+            return false
+        } else {
+            console.log('Success!')
+            return true
+        }
+    })
+}
+
 module.exports = {
     login: login,
     logins: logins,
     join: join,
     userdelete: userdelete,
     correction: correction,
+    savesing: savesing,
 }
