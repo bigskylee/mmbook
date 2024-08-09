@@ -21,31 +21,31 @@ function joincheck(id, pw, pwch, nik) {
         console.log('통과')
         count++
     } else {
-        console.log('id길이')
+        alert('id길이')
     }
     if (nivaluecheck(nik)) {
         console.log('통과')
         count++
     } else {
-        console.log('닉길이')
+        alert('닉길이')
     }
     if (lengthcheck(pw)) {
         console.log('통과')
         count++
     } else {
-        console.log('비번길이')
+        alert('비번길이')
     }
     if (pwandpwch(pw, pwch)) {
         console.log('통과')
         count++
     } else {
-        console.log('확인다름')
+        alert('확인다름')
     }
     if (idcheck(id)) {
         console.log('통과')
         count++
     } else {
-        console.log('한글or특문')
+        alert('한글or특문')
     }
 
     return count == 5

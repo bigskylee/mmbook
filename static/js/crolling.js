@@ -251,6 +251,9 @@ async function dataColling(req, res, surch, device, condition, pagen) {
                         '<td class="tablet">' +
                         song[index]['mlyricist'] +
                         '</td>' +
+                        '<td >' +
+                        '<div class="favorites">추가</div>' +
+                        '</td>' +
                         '</tr>',
                 )
             }

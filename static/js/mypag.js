@@ -7,11 +7,11 @@ document.getElementById('correbutton').addEventListener('click', function () {
 })
 
 document.getElementById('complete').addEventListener('click', function () {
-    const id = document.getElementById('id')
-    const pw = document.getElementById('pw')
-    const pwch = document.getElementById('pwch')
-    const nik = document.getElementById('nik')
-
+    const id = document.getElementById('id').value
+    const pw = document.getElementById('pw').value
+    const pwch = document.getElementById('pwch').value
+    const nik = document.getElementById('nik').value
+    console.log(id + ',' + pw + ',' + pwch + ',' + nik)
     if (joincheck(id, pw, pwch, nik)) {
         const form = document.createElement('form')
         form.setAttribute('method', 'post')
@@ -23,12 +23,8 @@ document.getElementById('complete').addEventListener('click', function () {
         ids.setAttribute('value', id)
         const password = document.createElement('input')
         password.setAttribute('type', 'hidden')
-        password.setAttribute('name', 'pw')
+        password.setAttribute('name', 'password')
         password.setAttribute('value', pw)
-        const passwordch = document.createElement('input')
-        passwordch.setAttribute('type', 'hidden')
-        passwordch.setAttribute('name', 'pwch')
-        passwordch.setAttribute('value', pwch)
         const unik = document.createElement('input')
         unik.setAttribute('type', 'hidden')
         unik.setAttribute('name', 'nik')
@@ -36,7 +32,6 @@ document.getElementById('complete').addEventListener('click', function () {
 
         form.appendChild(ids)
         form.appendChild(password)
-        form.appendChild(passwordch)
         form.appendChild(unik)
         document.body.appendChild(form)
         form.submit()
@@ -101,36 +96,30 @@ function idcheck(value) {
 
 function joincheck(id, pw, pwch, nik) {
     var count = 0
-    if (lengthcheck(id)) {
-        console.log('통과')
-        count++
-    } else {
-        console.log('id길이')
-    }
     if (nivaluecheck(nik)) {
         console.log('통과')
         count++
     } else {
-        console.log('닉길이')
+        alert('닉길이')
     }
     if (lengthcheck(pw)) {
         console.log('통과')
         count++
     } else {
-        console.log('비번길이')
+        alert('비번길이')
     }
     if (pwandpwch(pw, pwch)) {
         console.log('통과')
         count++
     } else {
-        console.log('확인다름')
+        alert('확인다름')
     }
     if (idcheck(id)) {
         console.log('통과')
         count++
     } else {
-        console.log('한글or특문')
+        alert('한글or특문')
     }
 
-    return count == 5
+    return count == 4
 }

@@ -109,11 +109,13 @@ app.get('/join', async function (req, res, next) {
 })
 app.post('/join/save', async function (req, res, next) {
     const join = await login.join(req, res, next)
+    console.log(join)
     if (join) {
         res.redirect('/login')
     } else {
         const html = fs.readFileSync(__dirname + '/static/html/join.html', 'utf-8')
-        const uhtml = userchack(req, html)
+        const ehtml = html.replace('<err />', '<div class="err">아이디 중복</div>')
+        const uhtml = userchack(req, ehtml)
         res.send(uhtml)
     }
 })
@@ -140,11 +142,15 @@ app.post('/logout', async function (req, res, next) {
     res.redirect('/login')
 })
 app.post('/correction', async function (req, res, next) {
+    login.correction(req, res, next)
+    const logins = await login.logins(req, res, next)
+    req.session.user = logins
     res.redirect('/mypag')
 })
 
 app.post('/userdelete', async function (req, res, next) {
     await login.userdelete(req, res, next)
+    req.session.user = null
     const html = fs.readFileSync(__dirname + '/static/html/home.html', 'utf-8')
     const uhtml = userchack(req, html)
     res.send(uhtml)
