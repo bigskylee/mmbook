@@ -7,6 +7,17 @@
     "express": "^4.19.2",
     "express-session": "^1.18.0",
     "mysql": "^2.18.1",
-    "nunjucks": "^3.2.4"
-  }
+    "nodemon": "^3.1.4",
+    "nunjucks": "^3.2.4",
+    "pakage.json": "^1.0.0"
+  },
+  "name": "mmbook",
+  "version": "1.0.0",
+  "description": "��#\u0000 \u0000m\u0000m\u0000b\u0000o\u0000o\u0000k\u0000\r\u0000 \u0000\r\u0000 \u0000#\u0000 \u0000m\u0000m\u0000b\u0000o\u0000o\u0000k\u0000\r\u0000 \u0000",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
 }

@@ -26,7 +26,7 @@ app.use(
 
 function userchack(req, html) {
     if (req.session.user) {
-        const userhtml = html.replace('<heders />', '<a href="/mysing">내음반</a><a href="/mypag">마이페이지</a>')
+        const userhtml = html.replace('<heders />', '<a href="/mysing/?page=1">내음반</a><a href="/mypag">마이페이지</a>')
         return userhtml
     } else {
         const nouserhtml = html.replace(
@@ -57,7 +57,6 @@ app.get('/test', async function (req, res, next) {
     let result = turn[0] //txts.join('')
     let page = turn[1] //pages.join('')
 
-    const fs = require('fs')
     const ahtml = fs.readFileSync(__dirname + '/static/html/mList.html', 'utf-8')
     const ahtml2 = ahtml.replace('<testsong />', '<div>' + result + '</div>')
     const shtml = ahtml2.replace('<pagelink />', '<div class="pagebox">' + page + '</div>')
@@ -164,6 +163,19 @@ app.post('/savesing', async function (req, res, next) {
         const username = req.session.user.uname
         login.savesing(req, res, next, username)
     }
+})
+
+app.get('/mysing', async function (req,res,next) {
+    const uname=req.session.user.uname
+    const mysings= await login.mysingselect(req,res,next,uname)
+    console.log("mysings : "+mysings)
+    const ahtml = fs.readFileSync(__dirname + '/static/html/mList.html', 'utf-8')
+    const ahtml2 = ahtml.replace('<testsong />', '<div>' + mysings['sings'] + '</div>')
+    const shtml = ahtml2.replace('<pagelink />', '<div class="pagebox">' + mysings['pages'] + '</div>')
+
+    const uhtml = userchack(req, shtml)
+    res.send(uhtml)
+    
 })
 
 app.listen(port, () => {

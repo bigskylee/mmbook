@@ -105,6 +105,99 @@ async function savesing(req, res, next, uname) {
     })
 }
 
+
+
+async function mysingselect(req, res, next, uname) {
+    return new Promise((resolve, reject) => {
+        const singselsql='select * from sing where username=?'
+        db.query(singselsql,[uname],(err,result)=>{
+            if(err){
+                console.log(err)
+            }else{  
+                const maxpage=Math.floor(result.length/15)+1
+                const page=req.query.page
+                console.log(result)
+                var sings=[]
+                for (var index=(page-1)*15;index<(page-1)*15+15&&index<result.length;index++){
+                    console.log('for문안 : '+result[index])
+                    sings.push(
+                        '<tr>'+
+                        '<td>TJ</td>'
+                        +
+                        '<td>'+
+                        result[index].snum +
+                        '</td>'+
+                        '<td>'+
+                        result[index].sname+
+                        '</td>'+
+                        '<td>'+
+                        result[index].ssinger+
+                        '</td>'+
+                        '<td class="tablet">'+
+                        result[index].scomposer+
+                        '</td>'+
+                        '<td class="tablet">'+
+                        result[index].slyricist+
+                        '</td>'+
+                        '<td >' +
+                        '<div class="favorites">추가</div>' +
+                        '</td>' +'</tr>'
+                    )
+                } 
+                console.log(sings)
+
+                var pages=[]
+                var pgrup = Math.floor(page / 10)
+                if (page > 10) {
+                    pages.push(
+                        '<a href="/mysing/?page=' +
+                            1 +
+                            '"><<</a>',
+                    )
+                    pages.push(
+                        '<a href="/mysing/?page=' +
+                            (pgrup * 10 - 1) +
+                            '"><</a>',
+                    )
+                }
+                for (let index = pgrup * 10 + 1; index < pgrup * 10 + 11; index++) {
+                    if (index == page) {
+                        pages.push('<div class="page">' + index + '</div>')
+                    } else if (index > maxpage) {
+                        break
+                    } else {
+                        pages.push(
+                            '<a href="/mysing/?page=' +
+                                index +
+                                '">[' +
+                                index +
+                                ']</a>',
+                        )
+                    }
+                }
+                if (maxpage - pgrup > 10) {
+                    pages.push(
+                        '<a href="/mysing/?page=' +
+                            (pgrup * 10 + 11) +
+                            '">></a>',
+                    )
+                    pages.push(
+                        '<a href="/mysing/?page=' +
+                            maxpage +
+                            '">>></a>',
+                    )
+                }
+                const mysings={'sings':sings, 'pages':pages }
+                console.log("sings : "+sings)
+                console.log("pages : "+pages)
+                console.log("mysings : "+mysings)
+                return resolve(mysings)
+            }
+        })
+    })
+}
+
+
 module.exports = {
     login: login,
     logins: logins,
@@ -112,4 +205,5 @@ module.exports = {
     userdelete: userdelete,
     correction: correction,
     savesing: savesing,
+    mysingselect:mysingselect
 }
